@@ -58,7 +58,6 @@ public class LessonsActivity extends AppCompatActivity {
                     JSONArray array = new JSONArray(response);
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject getData = array.getJSONObject(i);
-                        System.out.println(getData.getString("lecturer1"));
                         lessonModelList.add(new LessonModel(
                                 getData.getString("url"),
                                 getData.getString("title"),
