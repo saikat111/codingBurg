@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadSlider() {
-        String url =  api.getFrameworkCategory();
+        String url =  api.getProgrammingLanguageCategory();
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
