@@ -39,6 +39,7 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.Categ
         CategoryModel data = categoryModelList.get(position);
         holder.name.setText(data.getName());
         holder.type.setText(data.getType());
+        holder.title.setText(data.getTitle());
         Glide.with(mCtx).load(data.getImage()).into(holder.image);
     }
     @Override
@@ -46,7 +47,7 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.Categ
         return categoryModelList.size();
     }
     public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView name, type;
+        TextView name, type, title;
         ImageView image;
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,6 +55,7 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.Categ
             name = itemView.findViewById(R.id.name);
             type = itemView.findViewById(R.id.type);
             image = itemView.findViewById(R.id.image);
+            title = itemView.findViewById(R.id.title);
         }
 
         @Override

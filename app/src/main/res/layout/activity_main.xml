@@ -13,10 +13,26 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="8dp"
     android:orientation="vertical">
     <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="5dp">
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+        </androidx.appcompat.widget.SearchView>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="15dp"
         app:cardCornerRadius="6dp"
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -39,16 +55,17 @@
             app:sliderStartAutoCycle="true" />
 
     </androidx.cardview.widget.CardView>
+
     <TextView
+        android:layout_marginTop="15dp"
         android:id="@+id/type1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        style="@style/TextAppearance.AppCompat.Title"
-        ></TextView>
+        android:fontFamily="@font/aclonica"
+        android:textColor="@color/black"
+        android:textSize="20dp"></TextView>
 
     <RelativeLayout
-        android:layout_marginTop="15sp"
         android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -75,7 +92,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        style="@style/TextAppearance.AppCompat.Title"
+        android:fontFamily="@font/aclonica"
+        android:textColor="@color/black"
         ></TextView>
     <RelativeLayout
         android:layout_marginTop="15sp"
@@ -105,7 +123,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        style="@style/TextAppearance.AppCompat.Title"
+        android:fontFamily="@font/aclonica"
+        android:textColor="@color/black"
         ></TextView>
     <RelativeLayout
         android:layout_marginTop="15sp"
@@ -154,4 +173,10 @@
     </RelativeLayout>
 </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/menu_bottom" />
 </LinearLayout>
