@@ -1,6 +1,7 @@
 package com.sorder.saikat.codingburg.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,7 +9,10 @@ import android.app.DownloadManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -16,6 +20,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.leo.simplearcloader.SimpleArcLoader;
+import com.luseen.spacenavigation.SpaceItem;
+import com.luseen.spacenavigation.SpaceNavigationView;
+import com.luseen.spacenavigation.SpaceOnClickListener;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -36,7 +52,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    TextView type1,type2,type3;
+    Toolbar toolbar;
+    TextView type1,type2,type3, type4;
     RecyclerView recyclerView, recyclerView2,recyclerView3 ,recyclerView4;
     Api api = new Api();
     List<CategoryModel> categoryModelList;
@@ -50,26 +67,72 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
         sliderView = findViewById(R.id.imageSlider);
-
-/*        SliderAdapterExample adapter = new SliderAdapterExample(this);
-
-        sliderView.setSliderAdapter(adapter);
-
-        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
-        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
-        sliderView.setIndicatorSelectedColor(Color.WHITE);
-        sliderView.setIndicatorUnselectedColor(Color.GRAY);
-        sliderView.setScrollTimeInSec(4); //set scroll delay in seconds :
-        sliderView.startAutoCycle();*/
-
-
+        toolbar = findViewById(R.id.toolbar);
         type1 = findViewById(R.id.type1);
         type2 = findViewById(R.id.type2);
         type3 = findViewById(R.id.type3);
+        type4 = findViewById(R.id.type4);
+
+        SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
+        spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
+        spaceNavigationView.addSpaceItem(new SpaceItem("HOME", R.drawable.ic_baseline_search_24));
+        spaceNavigationView.addSpaceItem(new SpaceItem("SEARCH", R.drawable.ic_baseline_search_24));
+        spaceNavigationView.setCentreButtonIcon(R.drawable.ic_baseline_search_24);
+
+
+        spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
+            @Override
+            public void onCentreButtonClick() {
+                Toast.makeText(MainActivity.this,"onCentreButtonClick", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemClick(int itemIndex, String itemName) {
+                Toast.makeText(MainActivity.this, itemIndex + " " + itemName, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemReselected(int itemIndex, String itemName) {
+                Toast.makeText(MainActivity.this, itemIndex + " " + itemName, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.header)
+                .addProfiles(
+                        new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com")
+                )
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+                        return false;
+                    }
+                })
+                .build();
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("home");
+//create the drawer and remember the `Drawer` result object
+        Drawer result = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withAccountHeader(headerResult)
+                .addDrawerItems(
+                        item1
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        // do something with the clicked item :D
+                        return  true;
+                    }
+                })
+                .build();
+
+
         categoryModelList = new ArrayList<>();
         dbModelList = new ArrayList<>();
         fwModelList = new ArrayList<>();
@@ -239,6 +302,7 @@ public class MainActivity extends AppCompatActivity {
              recyclerView2.setHasFixedSize(true);
         recyclerView2.setLayoutManager(new LinearLayoutManager(this));
         simpleArcLoader2.start();
+        type4.setText("Blogs");
 
 
     /*    HorizontalLayout

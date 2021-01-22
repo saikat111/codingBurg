@@ -8,7 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-
+    <color name="colorPrimary">#1a1a2e</color>
     <color name="card_color">#152d32</color>
     <color name="text_code_color">#CCCB0A</color>
+
+    <color name="movie_card">#000027</color>
+    <color name="text_color">#DDE0D8</color>
 </resources>

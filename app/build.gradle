@@ -41,4 +41,7 @@ dependencies {
     implementation 'com.leo.simplearcloader:simplearcloader:1.0.+'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
+
+    implementation "com.mikepenz:materialdrawer:6.1.2"
+    implementation 'com.github.armcha:SpaceNavigationView:1.6.0'
 }
